@@ -1,0 +1,11 @@
+{
+  "name": "discord-bots-manager",
+  "version": "1.0.0",
+  "description": "Manages discord bots through a web interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ashraf Ibrahim",
+  "license": "MIT"
+}
