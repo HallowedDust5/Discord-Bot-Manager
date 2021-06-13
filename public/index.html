@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <title>Discord Bot Manager</title>
 </head>
 <body>
-    
+    <h1>Discord Bot Manager</h1>
+
+    <form>
+        <!Username>
+        <label for="username">Username:</label><br/>
+            <input type="text" id="username" name="username" required><br/>
+        <!Password>
+        <label for="pwd">Password:</label><br/>
+            <input type="password" id="pwd" name="pwd" required> <br/>
+        
+        <!Action choice>
+        <h3>Action Choice</h2>
+            <input type="radio" id="run" name="action" value="run" required>
+        <label for="run">Run</label><br/>
+            <input type="radio" id="update" name="action" value="update" required>
+        <label for="update">Update</label><br/>
+            <input type="radio" id="add" name="action" value="add" required>
+        <label for="add">Add</label><br/>
+
+        <!Noun Choice>
+        <h3>Bot Choice</h2>
+            <input type="radio" id="billary-clinton" name="bot-choice" value="billary-clinton" required>
+        <label for="billary-clinton">Billary Clinton</label><br/>
+            <input type="radio" id="among-us-bot" name="bot-choice" value="among-us-bot" required>
+        <label for="among-us-bot">Among Us Bot</label><br/>
+            <input type="radio" id="poll-bot" name="bot-choice" value="poll-bot" required>
+        <label for="poll-bot">Poll Bot</label>  
+
+        <!Submit Button>
+        <br/><br/><input type="submit" value="Submit"> <input type = "reset" name="Reset">  
+    </form>
 </body>
 </html>

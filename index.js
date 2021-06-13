@@ -1,1 +1,21 @@
-const express = require('express')
+const express = require('express');
+
+const fs = require('fs');
+
+//Initializes the server and the port
+const app = express();
+const port = 8080;
+
+
+//Starts the server and when it starts listening to the port, it writes when it started listening
+app.listen(port, ()=>{
+    // fs.appendFile("logs/server-uptime.txt", `Server started at ${Date.now()}\n`, (err) => {
+    //     if(err) {
+    //         return console.log(err);
+    //     }
+    //     console.log("Time saved to server-uptime");
+    // }); 
+});
+
+//Sends this folder to the client as their clientside application
+app.use(express.static('public'));
