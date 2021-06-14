@@ -28,19 +28,19 @@
             <input type="radio" id="add" name="action" value="add" onclick = "ShowHideDiv()" required>
         <label for="add">Add</label><br/>
         <div id = "addTextBox" style = "visibility: hidden;">
-            <input type="text" id = "bot-name" name = "action" placeholder = "Bot name" > <br/>
-            <input type="text" id = "github-link" name = "action" placeholder = "GitHub link">
+            <input type="text" id = "bot-name" name = "addOptions" placeholder = "Bot name" > <br/>
+            <input type="text" id = "github-link" name = "addOptions" placeholder = "GitHub link" pattern = "https://github.com/.+/.+\.git">
         </div>
             
             
 
-        <!Noun Choice>
+        <!Bot Choice>
         <h3>Bot Choice</h2>
-            <input type="radio" id="billary-clinton" name="bot-choice" value="billary-clinton" required>
+            <input type="radio" id="billary-clinton" name="botChoice" value="billary-clinton" required>
         <label for="billary-clinton">Billary Clinton</label><br/>
-            <input type="radio" id="among-us-bot" name="bot-choice" value="among-us-bot" required>
+            <input type="radio" id="among-us-bot" name="botChoice" value="among-us-bot" required>
         <label for="among-us-bot">Among Us Bot</label><br/>
-            <input type="radio" id="poll-bot" name="bot-choice" value="poll-bot" required>
+            <input type="radio" id="poll-bot" name="botChoice" value="poll-bot" required>
         <label for="poll-bot">Poll Bot</label>  
 
         <!Submit Button>
