@@ -6,6 +6,8 @@ const fs = require('fs');
 const app = express();
 const port = 8080;
 
+//Sends this folder to the client as their clientside application
+app.use(express.static('public'));
 
 //Starts the server and when it starts listening to the port, it writes when it started listening
 app.listen(port, ()=>{
@@ -16,6 +18,3 @@ app.listen(port, ()=>{
     //     console.log("Time saved to server-uptime");
     // }); 
 });
-
-//Sends this folder to the client as their clientside application
-app.use(express.static('public'));
