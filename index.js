@@ -1,3 +1,4 @@
+const { query } = require('express');
 const express = require('express');
 const fs = require('fs');
 const ifuncs = require("./indexfuncs");
@@ -10,7 +11,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded());
 app.use(express.json());
 
-
+ 
 //Starts the server and when it starts listening to the port, it writes when it started listening
 app.listen(port, ()=>{
     // fs.appendFile("logs/server-uptime.txt", `Server started at ${Date.now()}\n`, (err) => {
@@ -22,6 +23,11 @@ app.listen(port, ()=>{
 });
 
 app.post('/', (req, res)=>{
-    console.log(req.body);
+     let query = req.body;
+
+
+
+
+     
     res.end();
 });
