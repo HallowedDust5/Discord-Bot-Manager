@@ -25,9 +25,9 @@ app.listen(port, ()=>{
 app.post('/', (req, res)=>{
      let query = req.body;
 
+    
 
 
 
-     
     res.end();
 });

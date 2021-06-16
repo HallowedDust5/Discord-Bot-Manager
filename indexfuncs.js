@@ -33,7 +33,7 @@ const users = [
 
 //Checks to see if the username is correct
 //@params : userData = {username:'',pwd:''}
-exports.UsernameAuthorization = (userData)=>{
+exports.UserAuthentication = (userData)=>{
     
     for(let user in users){
         try{

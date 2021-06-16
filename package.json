@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
+    "express-ipfilter": "^1.2.0",
     "jquery": "^3.6.0"
   }
 }
