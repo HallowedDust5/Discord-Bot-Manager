@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <script src = "funcs.js"></script>
     <title>Discord Bot Manager</title>
 </head>
 <body>
     <h1>Discord Bot Manager</h1>
 
-    <form>
+    <form method = "POST" >
         <!Username>
         <label for="username">Username:</label><br/>
             <input type="text" id="username" name="username" required><br/>
@@ -20,20 +21,26 @@
         
         <!Action choice>
         <h3>Action Choice</h2>
-            <input type="radio" id="run" name="action" value="run" required>
+            <input type="radio" id="run" name="action" value="run" onclick = "ShowHideDiv()" required>
         <label for="run">Run</label><br/>
-            <input type="radio" id="update" name="action" value="update" required>
+            <input type="radio" id="update" name="action" value="update" onclick = "ShowHideDiv()"required>
         <label for="update">Update</label><br/>
-            <input type="radio" id="add" name="action" value="add" required>
+            <input type="radio" id="add" name="action" value="add" onclick = "ShowHideDiv()" required>
         <label for="add">Add</label><br/>
+        <div id = "addTextBox" style = "visibility: hidden;">
+            <input type="text" id = "bot-name" name = "addOptions" placeholder = "Bot name" > <br/>
+            <input type="text" id = "github-link" name = "addOptions" placeholder = "GitHub link" pattern = "https://github.com/.+/.+\.git">
+        </div>
+            
+            
 
-        <!Noun Choice>
+        <!Bot Choice>
         <h3>Bot Choice</h2>
-            <input type="radio" id="billary-clinton" name="bot-choice" value="billary-clinton" required>
+            <input type="radio" id="billary-clinton" name="botChoice" value="billary-clinton" required>
         <label for="billary-clinton">Billary Clinton</label><br/>
-            <input type="radio" id="among-us-bot" name="bot-choice" value="among-us-bot" required>
+            <input type="radio" id="among-us-bot" name="botChoice" value="among-us-bot" required>
         <label for="among-us-bot">Among Us Bot</label><br/>
-            <input type="radio" id="poll-bot" name="bot-choice" value="poll-bot" required>
+            <input type="radio" id="poll-bot" name="botChoice" value="poll-bot" required>
         <label for="poll-bot">Poll Bot</label>  
 
         <!Submit Button>
