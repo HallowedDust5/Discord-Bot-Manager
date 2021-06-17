@@ -1,11 +1,13 @@
-const { query } = require('express');
+//Imporrts
 const express = require('express');
 const fs = require('fs');
 const ifuncs = require("./indexfuncs");
 
-//Initializes the server and the port
+//Initializes the server and the port and 
 const app = express();
-const port = 8080;
+const port = 3000;
+
+
 //Sends this folder to the client as their clientside application
 app.use(express.static('public'));
 app.use(express.urlencoded());
@@ -23,9 +25,8 @@ app.listen(port, ()=>{
 });
 
 app.post('/', (req, res)=>{
-     let query = req.body;
 
-    
+    console.log(3);
 
 
 
