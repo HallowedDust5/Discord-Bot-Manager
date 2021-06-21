@@ -43,12 +43,13 @@
             
         <!Bot Choice>
         <h3>Bot Choice</h2>
-            <input type="radio" id="billary-clinton"  required>
-        <label for="billary-clinton">Billary Clinton</label><br/>
-            <input type="radio" id="among-us-bot"  required>
-        <label for="among-us-bot">Among Us Bot</label><br/>
-            <input type="radio" id="poll-bot"  required>
-        <label for="poll-bot">Poll Bot</label>  
+            <% bots.forEach(bot => { %>
+                <input type="radio" name="botChoice" id="<%=bot.name.toLowerCase().replace(" ","_")%>"  required>
+                <label for="<%=bot.name.toLowerCase().replace(" ","_")%>" ><%= bot.name %> </label><br/>
+            <% }) %>
+
+        
+    
 
         <!Submit Button>
         <br/><br/> <input type="submit" value="Submit" onsubmit="location.href='./index.html'"> <input type = "reset" name="Reset">  
