@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord Bot Manager</title>
 </head>
-<body>
-    <h1>Discord Bot Manager</h1>
+<body style="font-family: 'Times New Roman', Times, serif;">
+    <h1 style="text-align: center;">Discord Bot Manager</h1>
 
-    <form method = "POST">
+    <form action="/" method="POST" style="text-align: center;">
         <!Password>
         <label for="pwd">Passphrase:</label><br/>
             <input type="password" id="pwd" name="pwd" required> <br/>
@@ -26,13 +26,16 @@
             <div id = "addTextBox" style = "visibility: hidden;">
                 <input type="text" id = "bot-name" name = "addOptions" placeholder = "Bot name" > <br/>
                 <input type="text" id = "github-link" name = "addOptions" placeholder = "GitHub link" pattern = "https://github.com/.+/.+\.git">
+                <p style="font-size: small;">Make sure the GitHub Link is formatted properly</p>
             </div>
         
             <script> 
                 let addButton = document.getElementById('add');
                 let addTextBox = document.getElementById("addTextBox")
+                let textBox1 = addTextBox.children.item(0);
+                let textBox2 = addTextBox.children.item(2);
                 function checkFocus(){
-                    if(document.activeElement ===addButton) {addTextBox.style.visibility = 'visible';}
+                    if(document.activeElement ===addButton || document.activeElement===textBox1||document.activeElement===textBox2) {addTextBox.style.visibility = 'visible';}
                     else{addTextBox.style.visibility = 'hidden';}
                 }
                 setInterval(checkFocus,200);
@@ -42,8 +45,8 @@
         <h3>Bot Choice</h2>
             <!Generates a radio button for each new bot>
             <% bots.forEach(bot => { %>
-                <input type="radio" name="botChoice" id="<%=bot.name.toLowerCase().replace(" ","_")%>"  required>
-                <label for="<%=bot.name.toLowerCase().replace(" ","_")%>" ><%= bot.name %> </label><br/>
+                <input type="radio" name="botChoice" id="<%=bot.name%>"  value = "<%=bot.name%>"required>
+                <label for="<%=bot.name%>" ><%= bot.name %> </label><br/>
             <% }) %>
 
         
