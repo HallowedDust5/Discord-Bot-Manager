@@ -26,9 +26,11 @@
             <div id = "addTextBox" style = "visibility: hidden;">
                 <input type="text" id = "bot-name" name = "addOptions" placeholder = "Bot name" > <br/>
                 <input type="text" id = "github-link" name = "addOptions" placeholder = "GitHub link" pattern = "https://github.com/.+/.+\.git">
-                <p style="font-size: small;">Make sure the GitHub Link is formatted properly</p>
+                <p style="font-size: small;">Make sure the GitHub Link is formatted properly. It needs the https link, nothing else is accepted.
+                    <br/><span style='font-weight: bold;'>Make sure the main is called index.js</span></p>
             </div>
         
+            <!If add is selected, then the link and bot name options are shown>
             <script> 
                 let addButton = document.getElementById('add');
                 let addTextBox = document.getElementById("addTextBox")
@@ -42,13 +44,33 @@
             </script>
             
         <!Bot Choice>
-        <h3>Bot Choice</h2>
-            <!Generates a radio button for each new bot>
-            <% bots.forEach(bot => { %>
-                <input type="radio" name="botChoice" id="<%=bot.name%>"  value = "<%=bot.name%>"required>
-                <label for="<%=bot.name%>" ><%= bot.name %> </label><br/>
-            <% }) %>
+        <div id="botChoiceDiv" style = 'visibility: hidden;'>
+            <h3>Bot Choice</h2>
+                <!Generates a radio button for each new bot>
+                <% bots.forEach(bot => { %>
+                    <input type="radio" name="botChoice" id="<%=bot.name%>"  value = "<%=bot.name%>" required>
+                    <label for="<%=bot.name%>" ><%= bot.name %> </label><br/>
+                <% }) %>
+                <input type="radio" name="botChoice" id="none"  value = "none" required>
+                <label for="none" >None </label><br/>
 
+        </div>
+
+        <!Checks to see if the update or run buttons are selected, then makes the bot choice pop up>
+        <script>
+            function botChoiceDiv(){
+                if(document.getElementById('run').checked || document.getElementById('update').checked){
+                    document.getElementById('botChoiceDiv').style.visibility= 'visible';
+                }
+                else{
+                    document.getElementById('botChoiceDiv').style.visibility= 'hidden';
+                    documen.getElementById('none').checked=true;
+                }
+            }
+            setInterval(botChoiceDiv,200);
+            
+
+        </script>
         
     
 
