@@ -32,13 +32,9 @@
         
             <!If add is selected, then the link and bot name options are shown>
             <script> 
-                let addButton = document.getElementById('add');
-                let addTextBox = document.getElementById("addTextBox")
-                let textBox1 = addTextBox.children.item(0);
-                let textBox2 = addTextBox.children.item(2);
                 function checkFocus(){
-                    if(document.activeElement ===addButton || document.activeElement===textBox1||document.activeElement===textBox2) {addTextBox.style.visibility = 'visible';}
-                    else{addTextBox.style.visibility = 'hidden';}
+                    if(document.getElementById('add').checked){document.getElementById('addTextBox').style.visibility='visible';}
+                    else{document.getElementById('addTextBox').style.visibility='hidden';}
                 }
                 setInterval(checkFocus,200);
             </script>
@@ -51,8 +47,8 @@
                     <input type="radio" name="botChoice" id="<%=bot.name%>"  value = "<%=bot.name%>" required>
                     <label for="<%=bot.name%>" ><%= bot.name %> </label><br/>
                 <% }) %>
-                <input type="radio" name="botChoice" id="none"  value = "none" required>
-                <label for="none" >None </label><br/>
+                <input type="radio" name="botChoice" id="none"  value = "none" style = "visibility: hidden;"required>
+                <label for="none" style="visibility: hidden;">None </label><br/>
 
         </div>
 
@@ -61,10 +57,11 @@
             function botChoiceDiv(){
                 if(document.getElementById('run').checked || document.getElementById('update').checked){
                     document.getElementById('botChoiceDiv').style.visibility= 'visible';
+                    document.getElementById('none').checked=false;
                 }
                 else{
                     document.getElementById('botChoiceDiv').style.visibility= 'hidden';
-                    documen.getElementById('none').checked=true;
+                    document.getElementById('none').checked=true;
                 }
             }
             setInterval(botChoiceDiv,200);

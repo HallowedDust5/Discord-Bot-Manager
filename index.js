@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
-const funcs = require('./indexfuncs')
+const funcs = require('./indexfuncs');
 
 //Constants
 const app = express();
@@ -15,29 +15,41 @@ app.set('views','views');
 
 //Middleware
 app.use(express.urlencoded({extended:true}));
-//app.use(()=>{bots = JSON.parse(fs.readFileSync('./logs/bots.json'));});
 
 app.listen(3000);
 
 
 
+
+app.get('/retry',(req,res)=>{
+    res.render('retry');
+});
+
 app.get('/',(req,res)=>{
+    let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
     res.render('index', {bots});
+});
+
+app.get('/success',(req,res)=>{
+    res.render('success');
 });
 
 app.post('/',(req,res)=>{
     let formData = req.body;
     console.log(formData);
     if(bcrypt.compareSync(formData.pwd,passHash)){
+        delete formData.pwd;
         switch(formData.action){
             case 'run':
-                funcs.runBot();
+                if(funcs.runBot(formData)){res.redirect('/retry');}
                 break;
             case 'update':
-                funcs.updateBot();
+                if(!funcs.updateBot(formData)){res.redirect('/retry');}
+                res.redirect('/success');
                 break;
             case 'add':
-                funcs.addBot();
+                if(funcs.addBot(formData)){res.redirect('/retry');}
+                res.redirect('/success');
                 break;
             default:
                 
@@ -45,10 +57,9 @@ app.post('/',(req,res)=>{
         }
     }
     else{
-
+        res.redirect('/retry');
     }
-    res.render('retry');
-    res.redirect('/');
+    
 });
 
 
