@@ -41,17 +41,23 @@ app.post('/',(req,res)=>{
         delete formData.pwd;
         switch(formData.action){
             case 'run':
+                //When there's an error in the functions, it redirects the user to retry
                 if(funcs.runBot(formData)){res.redirect('/retry');}
                 break;
             case 'update':
-                if(!funcs.updateBot(formData)){res.redirect('/retry');}
+                if(funcs.updateBot(formData)){res.redirect('/retry');}
                 res.redirect('/success');
                 break;
             case 'add':
                 if(funcs.addBot(formData)){res.redirect('/retry');}
                 res.redirect('/success');
                 break;
+            case 'delete':
+                if(funcs.delBot(formData)){res.redirect('/retry');}
+                res.redirect('/success');
+                break;
             default:
+                break;
                 
 
         }

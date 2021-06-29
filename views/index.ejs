@@ -20,8 +20,11 @@
         <label for="run">Run</label><br/>
             <input type="radio" id="update" name="action" value="update" required>
         <label for="update">Update</label><br/>
+            <input type="radio" id="delete" name="action" value="delete"  required>
+        <label for="delete">Delete</label><br/>
             <input type="radio" id="add" name="action" value="add"  required>
-        <label for="add">Add</label><br/>
+        <label for="add">Add</label>
+        
         
             <div id = "addTextBox" style = "visibility: hidden;">
                 <input type="text" id = "bot-name" name = "addOptions" placeholder = "Bot name" > <br/>
@@ -55,7 +58,7 @@
         <!Checks to see if the update or run buttons are selected, then makes the bot choice pop up>
         <script>
             function botChoiceDiv(){
-                if(document.getElementById('run').checked || document.getElementById('update').checked){
+                if(document.getElementById('run').checked || document.getElementById('update').checked || document.getElementById('delete').checked){
                     document.getElementById('botChoiceDiv').style.visibility= 'visible';
                     document.getElementById('none').checked=false;
                 }
