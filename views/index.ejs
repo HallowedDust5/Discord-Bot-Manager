@@ -20,35 +20,57 @@
         <label for="run">Run</label><br/>
             <input type="radio" id="update" name="action" value="update" required>
         <label for="update">Update</label><br/>
+            <input type="radio" id="delete" name="action" value="delete"  required>
+        <label for="delete">Delete</label><br/>
             <input type="radio" id="add" name="action" value="add"  required>
-        <label for="add">Add</label><br/>
+        <label for="add">Add</label>
+        
         
             <div id = "addTextBox" style = "visibility: hidden;">
                 <input type="text" id = "bot-name" name = "addOptions" placeholder = "Bot name" > <br/>
                 <input type="text" id = "github-link" name = "addOptions" placeholder = "GitHub link" pattern = "https://github.com/.+/.+\.git">
-                <p style="font-size: small;">Make sure the GitHub Link is formatted properly</p>
+                <p style="font-size: small;">Make sure the GitHub Link is formatted properly. It needs the https link, nothing else is accepted.
+                    <br/><span style='font-weight: bold;'>Make sure the main is called index.js</span></p>
             </div>
         
+            <!If add is selected, then the link and bot name options are shown>
             <script> 
-                let addButton = document.getElementById('add');
-                let addTextBox = document.getElementById("addTextBox")
-                let textBox1 = addTextBox.children.item(0);
-                let textBox2 = addTextBox.children.item(2);
                 function checkFocus(){
-                    if(document.activeElement ===addButton || document.activeElement===textBox1||document.activeElement===textBox2) {addTextBox.style.visibility = 'visible';}
-                    else{addTextBox.style.visibility = 'hidden';}
+                    if(document.getElementById('add').checked){document.getElementById('addTextBox').style.visibility='visible';}
+                    else{document.getElementById('addTextBox').style.visibility='hidden';}
                 }
                 setInterval(checkFocus,200);
             </script>
             
         <!Bot Choice>
-        <h3>Bot Choice</h2>
-            <!Generates a radio button for each new bot>
-            <% bots.forEach(bot => { %>
-                <input type="radio" name="botChoice" id="<%=bot.name%>"  value = "<%=bot.name%>"required>
-                <label for="<%=bot.name%>" ><%= bot.name %> </label><br/>
-            <% }) %>
+        <div id="botChoiceDiv" style = 'visibility: hidden;'>
+            <h3>Bot Choice</h2>
+                <!Generates a radio button for each new bot>
+                <% bots.forEach(bot => { %>
+                    <input type="radio" name="botChoice" id="<%=bot.name%>"  value = "<%=bot.name%>" required>
+                    <label for="<%=bot.name%>" ><%= bot.name %> </label><br/>
+                <% }) %>
+                <input type="radio" name="botChoice" id="none"  value = "none" style = "visibility: hidden;"required>
+                <label for="none" style="visibility: hidden;">None </label><br/>
 
+        </div>
+
+        <!Checks to see if the update or run buttons are selected, then makes the bot choice pop up>
+        <script>
+            function botChoiceDiv(){
+                if(document.getElementById('run').checked || document.getElementById('update').checked || document.getElementById('delete').checked){
+                    document.getElementById('botChoiceDiv').style.visibility= 'visible';
+                    document.getElementById('none').checked=false;
+                }
+                else{
+                    document.getElementById('botChoiceDiv').style.visibility= 'hidden';
+                    document.getElementById('none').checked=true;
+                }
+            }
+            setInterval(botChoiceDiv,200);
+            
+
+        </script>
         
     
 
