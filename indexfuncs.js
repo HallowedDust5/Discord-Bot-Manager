@@ -1,4 +1,3 @@
-exec= require('child_process').exec;
 fs = require('fs');
 
 function runBot(formData){
@@ -46,24 +45,21 @@ function delBot(formData){
     let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
     let theBotChoice = bots.find(bot=>{bot.name===formData.botChoice});
     if(theBotChoice===undefined){return 404;}
-    exec(`cd discord_bots\\${formData.botChoice} & rmdir ${formData.botChoice} /s`,
-    (err,stdout,stderr)=>{
+    fs.rmdir(`discord_bots\\${formData.botChoice}`,{recursive:true} ,(err)=>{
         if(err){
             //add to logs and return a retry
             console.log(err);
             return 404;
         }
-        else{
-            bots.splice(bots.indexOf(bots.find(bot => {bots.name===formData.botChoice})));
-            fs.writeFile('./logs/bots.json',JSON.stringify(bots),(err,data)=>{
-                if (err){
-                    //Make it add to logs
-                    console.log('splice');
-                    return 404;
-                }
-            });   
-        }
-        console.log(stdout);
+        bots.splice(bots.indexOf(bots.find(bot => {bot.name===formData.botChoice})));
+        fs.writeFile('./logs/bots.json',JSON.stringify(bots),(err)=>{
+            if (err){
+                //Make it add to logs
+                console.log('splice');
+                return 404;
+            }
+        });
+        
     }); 
 
 }
