@@ -2,7 +2,7 @@ fs = require('fs');
 
 function runBot(formData){
     let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
-    if(bots.find(bot=>{bot.name===formData.botChoice})){return 404;}
+    if(bots.find(bot=>{bot.name===formData.botChoice;})){return 404;}
     exec(`cd discord_bots\\${formData.botChoice} & node index.js`,(err,stdout,stderr)=>{
         if(err){
             //add to logs and return a retry
@@ -16,7 +16,7 @@ function runBot(formData){
 
 function updateBot(formData){
     let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
-    let theBotChoice = bots.find(bot=>{bot.name===formData.botChoice});
+    let theBotChoice = bots.find(bot=>{bot.name===formData.botChoice;});
     if(theBotChoice===undefined){return 404;}
     exec(`cd discord_bots\\${formData.botChoice} & git pull ${theBotChoice.link}`,
     (err,stdout,stderr)=>{
@@ -43,7 +43,7 @@ function addBot(formData){
 
 function delBot(formData){
     let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
-    let theBotChoice = bots.find(bot=>{bot.name===formData.botChoice});
+    let theBotChoice = bots.find(bot=>{bot.name===formData.botChoice;});
     if(theBotChoice===undefined){return 404;}
     fs.rmdir(`discord_bots\\${formData.botChoice}`,{recursive:true} ,(err)=>{
         if(err){
@@ -51,7 +51,7 @@ function delBot(formData){
             console.log(err);
             return 404;
         }
-        bots.splice(bots.indexOf(bots.find(bot => {bot.name===formData.botChoice})));
+        bots.splice(bots.indexOf(bots.find(bot => {bot.name===formData.botChoice;})));
         fs.writeFile('./logs/bots.json',JSON.stringify(bots),(err)=>{
             if (err){
                 //Make it add to logs
