@@ -42,7 +42,9 @@ app.post('/',(req,res)=>{
         switch(formData.action){
             case 'run':
                 //When there's an error in the functions, it redirects the user to retry
+                //When no error, redirects to a success page
                 if(funcs.runBot(formData)){res.redirect('/retry');}
+                else{res.redirect('/success');}
                 break;
             case 'update':
                 if(funcs.updateBot(formData)){res.redirect('/retry');}
@@ -57,6 +59,7 @@ app.post('/',(req,res)=>{
                 else{res.redirect('/success');}
                 break;
             default:
+                res.redirect('/retry');
                 break;
                 
 
