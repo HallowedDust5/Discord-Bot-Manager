@@ -46,15 +46,15 @@ app.post('/',(req,res)=>{
                 break;
             case 'update':
                 if(funcs.updateBot(formData)){res.redirect('/retry');}
-                res.redirect('/success');
+                else{res.redirect('/success');}
                 break;
             case 'add':
                 if(funcs.addBot(formData)){res.redirect('/retry');}
-                res.redirect('/success');
+                else{res.redirect('/success');}
                 break;
             case 'delete':
                 if(funcs.delBot(formData)){res.redirect('/retry');}
-                res.redirect('/success');
+                else{res.redirect('/success');}
                 break;
             default:
                 break;
