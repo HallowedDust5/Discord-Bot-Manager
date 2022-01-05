@@ -8,7 +8,7 @@ function runBot(formData){
         if(err){
             //add to logs and return a retry
             console.log(err);
-            return 404;
+            return 'error with running bot';
         }
         console.log(stdout);
     }); 
@@ -22,13 +22,13 @@ function updateBot(formData){
         if (bot.name===formData.botChoice) {
             theBotChoice=bot;
         }
-    });    if(theBotChoice===undefined){return 404;}
+    });    if(theBotChoice===undefined){return 'Bot not found in bot list';}
     exec(`cd discord_bots\\${formData.botChoice} & git pull ${theBotChoice.link}`,
     (err,stdout,stderr)=>{
         if(err){
             //add to logs and return a retry
             console.log(err);
-            return 404;
+            return 'Error with pulling bot link';
         }
         console.log(stdout);
     }); 
@@ -40,12 +40,12 @@ function addBot(formData){
         if(err){
             //add to logs and return a retry
             console.log(err);
-            return 404;
+            return 'Problem with pulling bot or initiating git repository';
         }
         let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
         bots.push({name:formData.addOptions[0],link:formData.addOptions[1]});
         fs.writeFile('./logs/bots.json',JSON.stringify(bots),(err)=>{
-            if(err){return 404;}
+            if(err){return 'Problem with adding new bot to existing bots';}
         });
     }); 
 }
@@ -63,14 +63,14 @@ function delBot(formData){
         console.log('error');
         if(err){
             //add to logs and return a retry
-            return 404;
+            return 'Problem with removing bot';
         }
         //Take out the bot whose index is where the bot name is equal to the form data bot choice
         bots.splice(bots.findIndex(bot=>{bot.name===formData.botChoice;}));
         fs.writeFile('./logs/bots.json',JSON.stringify(bots),(err)=>{
             if (err){
                 //Make it add to logs
-                return 404;
+                return 'Problem with adding to logs';
             }
 
         });
