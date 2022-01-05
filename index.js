@@ -37,7 +37,6 @@ app.get('/success',(req,res)=>{
 
 app.post('/',(req,res)=>{
     let formData = req.body;
-    console.log(formData);
     if(bcrypt.compareSync(formData.pwd,passHash)){
         delete formData.pwd;
         switch(formData.action){

@@ -6,11 +6,8 @@ function runBot(formData){
     if(bots.find(bot=>{bot.name===formData.botChoice;})){return {isError:true,msg:'Bot not found in bot list'};}
     exec(`cd discord_bots\\${formData.botChoice} & node index.js`,(err,stdout,stderr)=>{
         if(err){
-            //add to logs and return a retry
-            console.log(err);
             return {isError:true,msg:'Error with running bot'};
         }
-        console.log(stdout);
     });
     return {isError:false,msg:`Successfully ran ${formData.botChoice}`};
 }
@@ -27,8 +24,6 @@ function updateBot(formData){
     exec(`cd discord_bots\\${formData.botChoice} & git pull ${theBotChoice.link}`,
     (err,stdout,stderr)=>{
         if(err){
-            //add to logs and return a retry
-            console.log(err);
             return {isError:true,msg:'Error with pulling bot link'};
         }
     }); 
@@ -62,9 +57,7 @@ function delBot(formData){
     });
     if(theBotChoice===undefined){return {isError:true,msg:'Bot not found in bot list'};}
     fs.rmdir(`./discord_bots/${theBotChoice.name}`,{recursive:true} ,(err)=>{
-        console.log('error');
         if(err){
-            //add to logs and return a retry
             return {isError:true, msg:'Problem with removing bot'};
         }
         //Take out the bot whose index is where the bot name is equal to the form data bot choice
