@@ -44,6 +44,13 @@ app.post('/',(req,res)=>{
             case 'run':
                 //When there's an error in the functions, it redirects the user to retry
                 //When no error, redirects to a success page
+                
+                /*
+                TODO
+                Use returns from indexfuncs functions to give error message on /retry
+                */
+
+
                 if(funcs.runBot(formData)){res.redirect('/retry');}
                 else{res.redirect('/success');}
                 break;
@@ -76,3 +83,12 @@ app.post('/',(req,res)=>{
 app.use((req,res)=>{
     res.status(404).render('404');
 });
+
+function log(line){
+    line = '\n'+line;
+    fs.appendFile('logs/server-uptime.txt',line,(err)=>{
+        if(err){console.log(`Logging failed at ${new Date()}`);}
+    });
+
+    
+}
