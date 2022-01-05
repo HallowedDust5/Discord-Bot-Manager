@@ -3,7 +3,7 @@ fs = require('fs');
 
 function runBot(formData){
     let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
-    if(bots.find(bot=>{bot.name===formData.botChoice;})){return 404;}
+    if(bots.find(bot=>{bot.name===formData.botChoice;})){return 404;}//Think about this
     exec(`cd discord_bots\\${formData.botChoice} & node index.js`,(err,stdout,stderr)=>{
         if(err){
             //add to logs and return a retry

@@ -21,12 +21,13 @@ app.listen(3000);
 
 
 
+
 app.get('/retry',(req,res)=>{
     res.render('retry');
 });
 
 app.get('/',(req,res)=>{
-    let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
+    // let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
     res.render('index', {bots});
 });
 
