@@ -8,6 +8,8 @@ const app = express();
 const passHash = bcrypt.hashSync(fs.readFileSync('./logs/passphrase.txt').toString());//Hashed version of password
 let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
 
+//Global variables
+var clientmessage;
 
 //View Engine
 app.set('view engine','ejs');
@@ -23,15 +25,16 @@ app.listen(3000);
 
 
 app.get('/retry',(req,res)=>{
+    serverLog(clientmessage);
     res.render('retry');
 });
 
 app.get('/',(req,res)=>{
-    // let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
     res.render('index', {bots});
 });
 
 app.get('/success',(req,res)=>{
+    serverLog(clientmessage);
     res.render('success');
 });
 
@@ -40,32 +43,62 @@ app.post('/',(req,res)=>{
     if(bcrypt.compareSync(formData.pwd,passHash)){
         delete formData.pwd;
         switch(formData.action){
-            case 'run':
-                //When there's an error in the functions, it redirects the user to retry
-                //When no error, redirects to a success page
-                
-                /*
-                TODO
-                Use returns from indexfuncs functions to give error message on /retry
-                */
 
 
-                if(funcs.runBot(formData)){res.redirect('/retry');}
-                else{res.redirect('/success');}
+            case 'run': // Run
+                cmd_response = funcs.runBot(formData);
+                clientmessage = cmd_response.msg;
+                if(cmd_response.isError){
+                    res.redirect('/retry');
+                }
+                else{
+                    res.redirect('/success');
+                }
                 break;
-            case 'update':
-                if(funcs.updateBot(formData)){res.redirect('/retry');}
-                else{res.redirect('/success');}
+
+
+
+            case 'update': //Update
+                cmd_response = funcs.updateBot(formData);
+                clientmessage = cmd_response.msg;
+                if(cmd_response.isError){
+                    res.redirect('/retry');
+            }
+                else{
+                    res.redirect('/success');
+                }
                 break;
-            case 'add':
-                if(funcs.addBot(formData)){res.redirect('/retry');}
-                else{res.redirect('/success');}
+
+
+
+            case 'add': //Add 
+                cmd_response = funcs.addBot(formData);
+                clientmessage = cmd_response.msg;
+                if(cmd_response.isError){
+                    res.redirect('/retry');
+                }
+                else{
+                    res.redirect('/success');
+                }
                 break;
-            case 'delete':
-                if(funcs.delBot(formData)){res.redirect('/retry');}
-                else{res.redirect('/success');}
+
+
+
+
+            case 'delete': //Delete
+                cmd_response = funcs.delBot(formData);
+                clientmessage = cmd_response.msg;
+                if(cmd_response.isError){
+                    res.redirect('/retry');
+                }
+                else{
+                    res.redirect('/success');
+                }
                 break;
+
+
             default:
+                clientmessage = 'Not a valid command'
                 res.redirect('/retry');
                 break;
                 
@@ -83,11 +116,9 @@ app.use((req,res)=>{
     res.status(404).render('404');
 });
 
-function log(line){
-    line = '\n'+line;
+function serverLog(line){
+    line = '\nOperation Message:'+line+` at ${new Date()}`;
     fs.appendFile('logs/server-uptime.txt',line,(err)=>{
         if(err){console.log(`Logging failed at ${new Date()}`);}
     });
-
-    
 }

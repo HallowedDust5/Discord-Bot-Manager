@@ -15,7 +15,9 @@
     "express": "^4.17.1",
     "express-ipfilter": "^1.2.0",
     "jquery": "^3.6.0",
-    "nodemon": "^2.0.9",
     "rangecalc": "^1.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
