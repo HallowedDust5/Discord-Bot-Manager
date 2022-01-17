@@ -21,7 +21,7 @@ function updateBot(formData){
             theBotChoice=bot;
         }
     });    if(theBotChoice===undefined){return {isError:true,msg:'Bot not found in bot list'};}
-    exec(`cd discord_bots\\${formData.botChoice}; git pull ${theBotChoice.link}`,
+    exec(`cd discord_bots\\${formData.botChoice}; git pull ${theBotChoice.link}; npm `,
     (err,stdout,stderr)=>{
         if(err){
             return {isError:true,msg:'Error with pulling bot link'};
@@ -32,7 +32,7 @@ function updateBot(formData){
 }
 
 function addBot(formData){
-    exec(`cd discord_bots; mkdir ${formData.addOptions[0]}; cd ${formData.addOptions[0]}; git init; git pull ${formData.addOptions[1]}`,
+    exec(`cd discord_bots; mkdir ${formData.addOptions[0]}; cd ${formData.addOptions[0]}; git init; git pull ${formData.addOptions[1]};npm init; npm i`,
     (err,stdout,stderr)=>{
         if(err){
 

@@ -6,10 +6,12 @@ const funcs = require('./indexfuncs');
 //Constants
 const app = express();
 const passHash = bcrypt.hashSync(fs.readFileSync('./logs/passphrase.txt').toString());//Hashed version of password
-let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
 //Global variables
 var clientmessage;
+let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
 
 //View Engine
 app.set('view engine','ejs');
@@ -18,11 +20,14 @@ app.set('views','views');
 //Middleware
 app.use(express.urlencoded({extended:true}));
 
-app.listen(3000);
+app.listen(PORT,HOST);
 
 
+// fs.writeFileSync('./logs/server-uptime.txt','')//Wipe server logs for dev purposes
+// fs.writeFileSync('./logs/bots.json','[]')//Wipe bots.json for dev purposes
 
-
+//TODO
+//addBot is not adding the bot to bots.json
 
 app.get('/retry',(req,res)=>{
     serverLog(clientmessage);

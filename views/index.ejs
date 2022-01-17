@@ -28,9 +28,10 @@
         
             <div id = "addTextBox" style = "visibility: hidden;">
                 <input type="text" id = "bot-name" name = "addOptions" placeholder = "Bot name" > <br/>
-                <input type="text" id = "github-link" name = "addOptions" placeholder = "GitHub link" pattern = "https://github.com/.+/.+\.git">
-                <p style="font-size: small;">Make sure the GitHub Link is formatted properly. It needs the https link, nothing else is accepted.
-                    <br/><span style='font-weight: bold;'>Make sure the main is called index.js</span></p>
+                <input type="text" id = "github-link" name = "addOptions" placeholder = "GitHub link" pattern = "(https:\/\/github.com\/.+\/.+\.git)|(git@github\.com:.+\/.+\.git)">
+                <p style="font-size: small;">Make sure the GitHub Link is formatted properly. It needs the https link or ssh link, nothing else is accepted.
+                     The directory should have the files index.js and package.json and the node modules needed in the node_modules folder. Also, if the repo is private, it has to be shared with HallowedDust5.
+                    <br/><span style='font-weight: bold;'>Make sure what you want run is called index.js</span></p>
             </div>
         
             <!If add is selected, then the link and bot name options are shown>
