@@ -1,5 +1,5 @@
-exec = require('child_process').exec;
-fs = require('fs');
+const exec = require('child_process').exec;
+const fs = require('fs');
 
 function runBot(formData){
     let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
@@ -21,7 +21,7 @@ function updateBot(formData){
             theBotChoice=bot;
         }
     });    if(theBotChoice===undefined){return {isError:true,msg:'Bot not found in bot list'};}
-    exec(`cd discord_bots\\${formData.botChoice}; git pull ${theBotChoice.link}; npm `,
+    exec(`cd discord_bots\\${formData.botChoice}; git pull ${theBotChoice.link}; npm i`,
     (err,stdout,stderr)=>{
         if(err){
             return {isError:true,msg:'Error with pulling bot link'};
@@ -32,13 +32,17 @@ function updateBot(formData){
 }
 
 function addBot(formData){
-    exec(`cd discord_bots; mkdir ${formData.addOptions[0]}; cd ${formData.addOptions[0]}; git init; git pull ${formData.addOptions[1]};npm init; npm i`,
+    exec(`cd discord_bots; mkdir ${formData.addOptions[0]}; cd ${formData.addOptions[0]}; git pull ${formData.addOptions[1]}; npm i`,
     (err,stdout,stderr)=>{
         if(err){
 
             return {isError:true,msg:'Problem with pulling bot or initiating git repository'};
         }
-        let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
+        
+        let bots = fs.readFile('./logs/bots.json',(err)=>{
+            if(err){return {isError:true,msg:'Problem with reading existing bots'};}
+        });
+        bots = JSON.parse(bots);
         bots.push({name:formData.addOptions[0],link:formData.addOptions[1]});
         fs.writeFile('./logs/bots.json',JSON.stringify(bots),(err)=>{
             if(err){return {isError:true,msg:'Problem with adding new bot to existing bots'};}
