@@ -1,5 +1,4 @@
 
-Operation Message:Successfully updated Among Us Botat Thu Jan 06 2022 10:18:17 GMT-0500 (Eastern Standard Time)
-Operation Message:Successfully ran Billary Clinton at Thu Jan 06 2022 10:23:49 GMT-0500 (Eastern Standard Time)
-Operation Message:Successfully deleted Test Bot at Thu Jan 06 2022 10:24:15 GMT-0500 (Eastern Standard Time)
-Operation Message:Successfully added dudeman at Thu Jan 06 2022 10:24:37 GMT-0500 (Eastern Standard Time)
+Operation Message:Successfully added Billary-Clinton at Sun Jan 16 2022 18:04:47 GMT-0500 (Eastern Standard Time)
+Operation Message:undefined at Sun Jan 16 2022 18:06:12 GMT-0500 (Eastern Standard Time)
+Operation Message:Successfully added Billary-Clinton at Sun Jan 16 2022 18:08:05 GMT-0500 (Eastern Standard Time)
