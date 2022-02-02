@@ -1,4 +1,4 @@
-node_modules/
+node_modules
 logs/passphrase.txt
 package-lock.json
 discord_bots
