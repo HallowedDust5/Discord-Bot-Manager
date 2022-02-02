@@ -46,36 +46,59 @@ Changed Data
 */
 function addBot(formData) {
     let repo_name = getRepoName(formData.addOptions[0]);
+    let repo_link = formData.addOptions[0];
+    let bots = JSON.parse(fs.readFileSync('./logs/bots.json'));
 
-    if(!isNewBot(formData.addOptions[0])){
+    //isAlreadyAdded is not returning true if a bot is in there
+    if(isAlreadyAdded(repo_link)){
         return {isError:true,msg:`${repo_name} is already present`};
     }
 
+    let local_git = simplegit('./discord_bots');
 
+    local_git
+        .clone(repo_link)
+        .addRemote('origin',repo_link,(npmInstallPackages(`./discord_bots/${repo_name}`)));
+
+
+
+
+
+    bots.push({name:repo_name,link:repo_link});
+    return {isError:false,msg:`${repo_name} was successfully added`};
 }
 
 
 
 
 //addBot helper functions
+
+const npmInstallPackages = (dir) =>{
+    exec(`cd ${dir}; npm i;`,(err)=>{
+        if(err){
+            return err;
+        }
+    });
+};
+
 const getRepoName = (repo_link)=>{
-    if(repo_link.contains('git@github.com')){
+    if(repo_link.includes('git@github.com')){
         return repo_link.match(ssh_link_re)[0];
     }
-    else if(repo_link.contains(`https://github.com`)){
+    else if(repo_link.includes(`https://github.com`)){
         return repo_link.match(https_link_re)[0];
     }
     return null;
 };
 
 
-const isNewBot = (repo_link) => {
+
+const isAlreadyAdded = (repo_link) => {
     repo_name = getRepoName(repo_link);
     fs.readdir('./discord_bots',(err,files)=>{
-        return files.includes(repo_name);
+        return files.includes(repo_name); 
     });
 };
-//End of addBot helper functions
 
 
 
