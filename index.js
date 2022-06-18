@@ -22,6 +22,7 @@ app.use(express.urlencoded({extended:true}));
 
 app.listen(PORT,HOST);
 
+// bruh
 
 // fs.writeFileSync('./logs/server-uptime.txt','')//Wipe server logs for dev purposes
 // fs.writeFileSync('./logs/bots.json','[]')//Wipe bots.json for dev purposes
